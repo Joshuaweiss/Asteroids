@@ -1,19 +1,20 @@
-(
+(function() {
   var Coordinate = window.Asteroids.utils.Coordinate
+  var MovingObject = window.Asteroids.MovingObject
 
   var COLOR = "#AAAAAA";
   var RADIUS = 50;
+  var Defaults = function(){
+    this.color = COLOR;
+    this.radius = RADIUS;
+    this.vel = Coordinate.prototype.random();
+    this.pos = Coordinate.prototype.random();
+  };
 
   var Asteroid = window.Asteroids.Asteroid = function(options) {
-    this.color = options.color || COLOR;
-    this.radius = options.radius || RADIUS;
-    this.vel = options.vel || Coordinate.random();
-    this.pos = options.pos || Coordinate.random();
-
+    MovingObject.call(this, new Defaults().merge(options));
   };
 
   Asteroid.inherits(window.Asteroids.MovingObject);
 
-
-
-)();
+})();

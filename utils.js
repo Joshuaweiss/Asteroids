@@ -1,4 +1,8 @@
-(var Coordinate = window.Asteroids.utils.Coordinate = function(x, y) {
+window.Asteroids = {};
+window.Asteroids.utils = {};
+
+(function() {
+var Coordinate = window.Asteroids.utils.Coordinate = function(x, y) {
   this.x = x;
   this.y = y;
 };
@@ -16,18 +20,32 @@ Coordinate.prototype.add = function(otherCoord){
   return new Coordinate(this.x + otherCoord.x, this.y + otherCoord.y);
 };
 
-Coordinate.prototype.random = function(){
-  return new Coorindate( Math.floor(1000*Math.random() ), Math.floor(1000*Math.random()) );
-};
-)();
+Coordinate.prototype.random = function(maxX, maxY){
+  return new Coordinate( Math.floor(100000*Math.random() ) % maxX, Math.floor(100000*Math.random() ) % maxY);
+  };
+})();
 
 
-(Function.prototype.inherits = function(parentClass) {
+(function() {
+  Function.prototype.inherits = function(parentClass) {
    var Surrogate = function() {};
    Surrogate.prototype = parentClass.prototype;
    this.prototype = new Surrogate();
-};
-)();
+ };
+})();
+
+(function() {
+  Object.prototype.merge = function(otherObject) {
+  var bo = {};
+  for (var x in this) {
+    bo[x] = this[x];
+  }
+  for (var y in otherObject) {
+    bo[y] = otherObject[y];
+  }
+  return bo;
+  };
+})();
 
 
 //
