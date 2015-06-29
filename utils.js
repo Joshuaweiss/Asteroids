@@ -22,8 +22,15 @@ Coordinate.prototype.add = function(otherCoord){
 
 Coordinate.prototype.random = function(maxX, maxY){
   return new Coordinate( Math.floor(100000*Math.random() ) % maxX, Math.floor(100000*Math.random() ) % maxY);
-  };
+};
+
+Coordinate.prototype.wrap = function(maxX, maxY) {
+  this.x = this.x % maxX;
+  this.y = this.y % maxY;
+}
+
 })();
+
 
 
 (function() {
