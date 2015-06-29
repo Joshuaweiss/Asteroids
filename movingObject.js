@@ -30,5 +30,9 @@ MovingObject.prototype.move = function(){
   return this.pos = this.pos.add(this.vel);
 }
 
+MovingObject.prototype.isCollidedWith = function(otherObject){
+  return (this.pos.dist(otherObject.pos) < this.radius + otherObject.radius)
+}
+
 
 })();
