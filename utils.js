@@ -2,27 +2,40 @@ window.Asteroids = {};
 window.Asteroids.utils = {};
 
 (function() {
-var Coordinate = window.Asteroids.utils.Coordinate = function(x, y) {
+"use strict";
+
+var Coordinate = window.Asteroids.Coordinate = function(x, y) {
   this.x = x;
   this.y = y;
 };
 
-
-Coordinate.prototype.dist = function(otherCoord){
+Coordinate.prototype.dist = function(otherCoord) {
   return Math.sqrt(Math.pow((this.x - otherCoord.x), 2)  + Math.pow((this.y - otherCoord.y), 2));
 };
 
-Coordinate.prototype.norm = function(){
+Coordinate.prototype.norm = function() {
   return this.dist(new Coordinate(0,0));
 };
 
-Coordinate.prototype.add = function(otherCoord){
+Coordinate.prototype.add = function(otherCoord) {
   return new Coordinate(this.x + otherCoord.x, this.y + otherCoord.y);
 };
 
-Coordinate.prototype.random = function(maxX, maxY){
-  return new Coordinate( Math.floor(100000*Math.random() ) % maxX, Math.floor(100000*Math.random() ) % maxY);
+Coordinate.prototype.diff = function(otherCoord) {
+  return new Coordinate(this.x - otherCoord.x, this.y - otherCoord.y);
 };
+
+Coordinate.prototype.adv = function(otherCoord) {
+  return new Coordinate((this.x + otherCoord.x)/2, (this.y + otherCoord.y) / 2);
+};
+
+Coordinate.prototype.random = function(maxX, maxY) {
+  return new Coordinate( Math.floor(100000 * Math.random()) % maxX, Math.floor(100000 * Math.random()) % maxY);
+};
+
+Coordinate.prototype.rotate = function(ang) {
+  return new Coordinate(this.x * Math.cos(ang) - (this.y * Math.sin(ang)), this.x * Math.sin(ang) + (this.y * Math.cos(ang)) );
+}
 
 Coordinate.prototype.wrap = function(maxX, maxY) {
   this.x = (this.x < 0 ? maxX + this.x : this.x);
@@ -36,19 +49,36 @@ Coordinate.prototype.multiplier = function (mult) {
   return new Coordinate(this.x * mult, this.y * mult);
 }
 
+Coordinate.prototype.slope = function () {
+  return this.y / this.x;
+}
+
+Coordinate.prototype.withMag = function (mag) {
+  var y = (mag / Math.sqrt(Math.pow(this.x / this.y, 2) + 1));
+  var x = (mag /  Math.sqrt(Math.pow(this.y / this.x, 2) + 1));
+  x = (this.x < 0 ? x * -1 : x * 1);
+  y = (this.y < 0 ? y * -1 : y * 1);
+
+  return (new Coordinate(x, y));
+}
+
 })();
 
 
-
 (function() {
+  "use strict";
+
   Function.prototype.inherits = function(parentClass) {
    var Surrogate = function() {};
    Surrogate.prototype = parentClass.prototype;
    this.prototype = new Surrogate();
- };
+  };
 })();
 
+
 (function() {
+  "use strict";
+
   Object.prototype.merge = function(otherObject) {
   var bo = {};
   for (var x in this) {
