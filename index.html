@@ -1,0 +1,32 @@
+<html>
+
+  <head>
+    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="keymaster/keymaster.js"></script>
+    <script src="lib/utils.js"></script>
+    <script src="lib/movingObject.js"></script>
+    <script src="lib/bullet.js"></script>
+    <script src="lib/asteroid.js"></script>
+    <script src="lib/ship.js"></script>
+    <script src="lib/game.js"></script>
+    <script src="lib/gameView.js"></script>
+    <link rel="stylesheet" type="text/css" href="index.css">
+  </head>
+
+  <body>
+    <figure class="game-view">
+      <canvas id="canv"></canvas>
+    </figure>
+    <script>
+      var GameView = window.Asteroids.GameView;
+      var canv = document.getElementById('canv')
+      var ctx = canv.getContext('2d');
+      var g = window.Asteroids.gameview = new GameView(ctx);
+      canv.height = g.game.DIM_Y;
+      canv.width = g.game.DIM_X;
+      g.start();
+    </script>
+
+  </body>
+
+</html>
