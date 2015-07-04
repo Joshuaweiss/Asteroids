@@ -1,7 +1,8 @@
 (function(){
+  "use strict";
 
   var MovingObject = window.Asteroids.MovingObject;
-  var Coordinate = window.Asteroids.utils.Coordinate;
+  var Coordinate = window.Asteroids.Coordinate;
   var Bullet = window.Asteroids.Bullet;
 
   var Ship = window.Asteroids.Ship = function(options){
@@ -11,21 +12,26 @@
     this.pos = options.pos;
   }
 
-  Ship.inherits(window.Asteroids.MovingObject)
+
+  Ship.inherits(window.Asteroids.MovingObject);
+
 
   Ship.prototype.power = function (impulse) {
     this.vel = this.vel.add(impulse);
-    // this.vel.wrap(5,5);
+    if (this.vel.norm() > 25) {
+      this.vel = this.vel.withMag(25);
+    }
+    return this.vel;
   }
+
 
   Ship.prototype.fireBullet = function () {
-    var bullet = new Bullet({vel: this.vel.multiplier(3), pos: this.pos});
+    var bullet = new Bullet({vel: this.vel.withMag(30), pos: this.pos});
     window.g.game.bullets.push(bullet);
     setTimeout(function(){
-      window.g.game.removeObject(bullet)
-    },2000);
+      window.g.game.removeObject(bullet);
+    },300);
   }
-
 
 
 })();
