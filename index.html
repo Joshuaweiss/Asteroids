@@ -24,8 +24,8 @@
       var canv = document.getElementById('canv')
       var ctx = canv.getContext('2d');
       var g = window.Asteroids.gameview = new GameView(ctx);
-      canv.height = g.game.DIM_Y;
-      canv.width = g.game.DIM_X;
+      canv.height = window.Asteroids.DIM_Y;
+      canv.width = window.Asteroids.DIM_X;
       g.start();
     </script>
 
