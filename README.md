@@ -25,7 +25,7 @@ Asteroids is a space shooter created from the ground up using JavaScript and HTM
 * Ship always spawns at a minimum distance from any asteroid
 
 
-# Future Todos
+# Future To-Dos
 
 * Add powerups
 * Add highscore board
