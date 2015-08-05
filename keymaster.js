@@ -117,8 +117,6 @@
   // unset modifier keys on keyup
   function clearModifier(event){
 
-    debugger
-
     var key = event.keyCode, k,
         i = index(_downKeys, key);
 
